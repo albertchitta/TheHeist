@@ -24,8 +24,7 @@ namespace TheHeist.Models
 
         public void Print()
         {
-            Console.WriteLine($@"
-Name: {Name}
+            Console.WriteLine($@"Name: {Name}
 Skill Level: {SkillLevel}
 Courage: {CourageFactor}
 ");
