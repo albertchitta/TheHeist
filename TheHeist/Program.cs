@@ -56,3 +56,22 @@ Console.WriteLine($@"
      {team.Members.Count} member(s)
 --------------------");
 team.Members.ForEach(member => member.Print());
+
+int difficultyLevel = 100;
+int teamSkillLevel = 0;
+
+team.Members.ForEach(member =>
+    {
+        teamSkillLevel += member.SkillLevel;
+    }  
+);
+
+Console.WriteLine($@"Team Skill Level: {teamSkillLevel}");
+if (teamSkillLevel >= difficultyLevel)
+{
+    Console.WriteLine("Mission Success!");
+}
+else
+{
+    Console.WriteLine("Mission Failed!");
+}
