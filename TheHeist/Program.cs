@@ -22,22 +22,37 @@ var name = Console.ReadLine();
 bool successful = false;
 int parsedSkill = 0;
 decimal parsedCourage = 0;
+Team team = new Team();
 
-while (!successful)
+while (name != "")
 {
-    Console.WriteLine($"Enter {name}'s skill level:");
-    var skill = Console.ReadLine(); //"1"
-    //try parse - 1. returns a bool whether it succeeded or not 2.
-    successful = int.TryParse(skill, out parsedSkill);
+    while (!successful)
+    {
+        Console.WriteLine($"Enter {name}'s skill level:");
+        var skill = Console.ReadLine(); //"1"
+        //try parse - 1. returns a bool whether it succeeded or not 2.
+        successful = int.TryParse(skill, out parsedSkill);
+    }
+    successful = false;
+
+    while (!successful)
+    {
+        Console.WriteLine($"Enter {name}'s courage factor:");
+        var courage = Console.ReadLine();
+        successful = decimal.TryParse(courage, out parsedCourage);
+    }
+    successful = false;
+
+    var teamMember = new TeamMember(name, parsedSkill, parsedCourage);
+    team.AddMember(teamMember);
+
+    Console.WriteLine();
+    Console.WriteLine(question1);
+    name = Console.ReadLine();
 }
 
-successful = false;
-while (!successful)
-{
-    Console.WriteLine($"Enter {name}'s courage factor:");
-    var courage = Console.ReadLine();
-    successful = decimal.TryParse(courage, out parsedCourage);
-}
-
-var teamMember = new TeamMember(name, parsedSkill, parsedCourage);
-teamMember.Print();
+Console.WriteLine($@"
+        TEAM
+     {team.Members.Count} member(s)
+--------------------");
+team.Members.ForEach(member => member.Print());
