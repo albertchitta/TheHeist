@@ -66,7 +66,13 @@ team.Members.ForEach(member =>
     }  
 );
 
+Random r = new Random();
+int luckValue = r.Next(-10, 10);
+
+difficultyLevel += luckValue;
+
 Console.WriteLine($@"Team Skill Level: {teamSkillLevel}");
+Console.WriteLine($@"Bank Difficulty Level: {difficultyLevel}");
 if (teamSkillLevel >= difficultyLevel)
 {
     Console.WriteLine("Mission Success!");
