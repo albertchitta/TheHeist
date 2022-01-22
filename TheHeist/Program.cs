@@ -15,7 +15,7 @@ var title = $@"
 ";
 Console.WriteLine(title);
 
-var question1 = "Enter team member name:";
+var question1 = "Enter team member name (leave blank to end):";
 Console.WriteLine(question1);
 var name = Console.ReadLine();
 
@@ -73,11 +73,30 @@ difficultyLevel += luckValue;
 
 Console.WriteLine($@"Team Skill Level: {teamSkillLevel}");
 Console.WriteLine($@"Bank Difficulty Level: {difficultyLevel}");
-if (teamSkillLevel >= difficultyLevel)
+
+var heistResult = teamSkillLevel >= difficultyLevel;
+Console.WriteLine($@"Mission {(heistResult ? "Success" : "Failed")}!");
+
+Console.WriteLine();
+successful = false;
+int parsedTrialRuns = 0;
+while (!successful)
 {
-    Console.WriteLine("Mission Success!");
+    Console.WriteLine($"Enter the number of trial runs:");
+    var trialRuns = Console.ReadLine();
+    successful = int.TryParse(trialRuns, out parsedTrialRuns);
 }
-else
+
+Console.WriteLine();
+
+for (int i = 0; i < parsedTrialRuns; i++)
 {
-    Console.WriteLine("Mission Failed!");
+    luckValue = r.Next(-10, 10);
+
+    difficultyLevel += luckValue;
+
+    Console.WriteLine($@"Trial Number {i + 1}");
+    Console.WriteLine($@"Team Skill Level: {teamSkillLevel}");
+    Console.WriteLine($@"Bank Difficulty Level: {difficultyLevel}");
+    Console.WriteLine();
 }
