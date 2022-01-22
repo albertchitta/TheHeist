@@ -15,6 +15,9 @@ var title = $@"
 ";
 Console.WriteLine(title);
 
+Console.WriteLine("Enter the bank difficulty (1-100):");
+int difficultyLevel = int.Parse(Console.ReadLine());
+
 var question1 = "Enter team member name (leave blank to end):";
 Console.WriteLine(question1);
 var name = Console.ReadLine();
@@ -28,7 +31,7 @@ while (name != "")
 {
     while (!successful)
     {
-        Console.WriteLine($"Enter {name}'s skill level:");
+        Console.WriteLine($"Enter {name}'s skill level (1-100):");
         var skill = Console.ReadLine(); //"1"
         //try parse - 1. returns a bool whether it succeeded or not 2.
         successful = int.TryParse(skill, out parsedSkill);
@@ -37,7 +40,7 @@ while (name != "")
 
     while (!successful)
     {
-        Console.WriteLine($"Enter {name}'s courage factor:");
+        Console.WriteLine($"Enter {name}'s courage factor (0.0-2.0):");
         var courage = Console.ReadLine();
         successful = decimal.TryParse(courage, out parsedCourage);
     }
@@ -57,7 +60,6 @@ Console.WriteLine($@"
 --------------------");
 team.Members.ForEach(member => member.Print());
 
-int difficultyLevel = 100;
 int teamSkillLevel = 0;
 
 team.Members.ForEach(member =>
@@ -89,6 +91,8 @@ while (!successful)
 
 Console.WriteLine();
 
+int successfulRuns = 0;
+int failedRuns = 0;
 for (int i = 0; i < parsedTrialRuns; i++)
 {
     luckValue = r.Next(-10, 10);
@@ -98,5 +102,19 @@ for (int i = 0; i < parsedTrialRuns; i++)
     Console.WriteLine($@"Trial Number {i + 1}");
     Console.WriteLine($@"Team Skill Level: {teamSkillLevel}");
     Console.WriteLine($@"Bank Difficulty Level: {difficultyLevel}");
+
+    heistResult = teamSkillLevel >= difficultyLevel;
+    Console.WriteLine($@"Mission {(heistResult ? "Success" : "Failed")}!");
+    if (heistResult)
+    {
+        successfulRuns++;
+    }
+    else
+    {
+        failedRuns++;
+    }
     Console.WriteLine();
 }
+
+Console.WriteLine($@"{successfulRuns} successful runs.");
+Console.WriteLine($@"{failedRuns} failed runs.");
